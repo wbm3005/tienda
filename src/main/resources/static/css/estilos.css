@@ -1,14 +1,83 @@
+/* selector de ID */
+
 #tituloPrincipal {
     text-align: center;
     color: white;
     background-color: purple;
 }
 
-.parrafoverde {
-    color: green;
-}
+
+/* selector de clases */
 
 .parraforojo {
     color: red;
 }
 
+
+.parrafoverde {
+    color: purple;
+}
+
+.ejemploPadding{
+    /*aplica a los 4 lados*/
+    padding: 10px;
+    
+    /*aplica Arriba/Abajo - Derecha/Izquierda */
+    padding: 10px 20px;
+    
+    /*aplica arriba - izquierda/derecha - abajo */
+    padding: 10px 20px 30px;
+    
+    /*Arriba - Derecha - Abajo - Izquierda*/
+    padding: 10px 20px 30px 40px;
+    
+    margin-bottom: 40px /*puede ser especifico*/
+}
+
+/* selector de elementos */
+
+/*
+p {
+    font-size: 20px;
+}
+*/
+
+/*
+p, h1, div {
+    background-color: antiquewhite;
+}
+*/
+
+
+/*selector descendente*/
+div p{
+    font-size: 50px;
+}
+
+div p.parrafoverde{ 
+    font-size: 50px;
+}
+
+/*se puede ser tan especifico como se guste*/
+
+
+
+a {
+    font-size: 20px;
+}
+
+/* pseudo clases */
+
+a:visited{
+    color: green;
+}
+
+a:hover{
+    color: red;
+    transition: 1s;
+}
+
+a:active{
+    color: white;
+    background: black;
+}
