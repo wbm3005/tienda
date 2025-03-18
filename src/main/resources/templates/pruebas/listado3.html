@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>TechShop</title>
+    </head>
+    <body>
+        <!-- Header reutilizando la plantilla -->
+        <header th:replace="~{layout/plantilla :: header}"></header>
+
+        <div class="container">
+            <div class="row my-4">
+                <h2>Búsqueda Avanzada por Categoría y Precio</h2>
+
+                <!-- Formulario para seleccionar categoría y precio máximo -->
+                <form method="POST"
+                      th:action="@{/pruebas/busquedaCatPrecio}"
+                      class="was-validated">
+
+                    <div class="mb-3">
+                        <label for="idCategoria">Categoría:</label>
+                        <select class="form-select"
+                                th:name="idCategoria"
+                                required>
+                            <option value="">-- Selecciona --</option>
+                            <option th:each="cat : ${categorias}"
+                                    th:value="${cat.idCategoria}"
+                                    th:text="${cat.descripcion}"
+                                    th:selected="${cat.idCategoria} == ${idCategoria}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="precioMax">Precio máximo:</label>
+                        <input type="number" class="form-control"
+                               th:name="precioMax"
+                               th:value="${precioMax}"
+                               required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Buscar
+                    </button>
+                </form>
+            </div>
+
+            <!-- Muestra resultados si existen -->
+            <div class="row mt-4" th:if="${productos != null}">
+                <h4>Resultados</h4>
+                <section th:replace="~{pruebas/fragmentos :: listadoProductos}"></section>
+            </div>
+        </div>
+
+        <!-- Footer reutilizando la plantilla -->
+        <footer th:replace="~{layout/plantilla :: footer}"></footer>
+    </body>
+</html>

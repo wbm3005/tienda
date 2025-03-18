@@ -59,18 +59,25 @@ public class ProductoServiceImpl implements ProductoService {
     public List<Producto> findByPrecioBetweenOrderByDescripcion(double precioInf, double precioSup) {
         return productoDao.findByPrecioBetweenOrderByDescripcion(precioInf, precioSup);
     }
-    
+
     // Lista de productos con precio entre ordendados por descripción con JPQL
     @Override
-    @Transactional(readOnly=true)    
+    @Transactional(readOnly = true)
     public List<Producto> metodoJPQL(double precioInf, double precioSup) {
         return productoDao.metodoJPQL(precioInf, precioSup);
     }
-    
+
     // Lista de productos con precio entre ordendados por descripción con SQL nativo
     @Override
-    @Transactional(readOnly=true)    
+    @Transactional(readOnly = true)
     public List<Producto> metodoNativo(double precioInf, double precioSup) {
         return productoDao.metodoNativo(precioInf, precioSup);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> metodoJPQLCategoriaPrecio(Long idCategoria, double precioMax) {
+        return productoDao.metodoJPQLCategoriaPrecio(idCategoria, precioMax);
+    }
+
 }
