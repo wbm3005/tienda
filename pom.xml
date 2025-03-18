@@ -92,7 +92,15 @@
             <groupId>com.google.firebase</groupId>
             <artifactId>firebase-admin</artifactId>
             <version>9.1.1</version>
-        </dependency>  
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -127,6 +135,14 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <!-- Ajusta la ruta a la carpeta de recursos que quieres sin filtering -->
+                <directory>src/main/resources</directory>
+                <!-- Deshabilita el filtering -->
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
     
 </project>

@@ -31,7 +31,8 @@ public class ProductoController {
     @RequestMapping("/listado")
     public String listado(Model model) {
         List<Producto> productos = productoService.getProductos(false);
-        
+        //List<Producto> productos = productoService.buscarporExistencias(5);
+        //List<Producto> productos = productoService.buscarporExistenciasYPrecio(5, 25000.0);
         List<Categoria> listaCategoriasActivas = categoriaService.getCategorias(true);
         model.addAttribute("productos", productos);
         model.addAttribute("totalProductos", productos.size());

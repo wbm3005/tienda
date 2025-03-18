@@ -14,10 +14,10 @@ public class IndexController {
         return "index";
     }
     
-    @RequestMapping("/informacion")
-    public String contacto(Model model) {
-        return "contacto";
-    }
+//    @RequestMapping("/informacion")
+//    public String contacto(Model model) {
+//        return "contacto";
+//    }
 
 }
  

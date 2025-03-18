@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service
 public class ProductoServiceImpl implements ProductoService {
 
@@ -42,5 +41,36 @@ public class ProductoServiceImpl implements ProductoService {
     public void delete(Producto producto) {
         productoDao.deleteById(producto.getIdProducto());
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> buscarporExistencias(int existencias) {
+        return productoDao.findByExistencias(existencias);
+    }
+
+    @Override
+    public List<Producto> buscarporExistenciasYPrecio(int existencias, double precio) {
+        return productoDao.findByExistenciasAndPrecio(existencias, precio);
+    }
+
+    // Lista de productos con precio entre ordendados por descripción con ConsultaAmpliada
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> findByPrecioBetweenOrderByDescripcion(double precioInf, double precioSup) {
+        return productoDao.findByPrecioBetweenOrderByDescripcion(precioInf, precioSup);
+    }
     
+    // Lista de productos con precio entre ordendados por descripción con JPQL
+    @Override
+    @Transactional(readOnly=true)    
+    public List<Producto> metodoJPQL(double precioInf, double precioSup) {
+        return productoDao.metodoJPQL(precioInf, precioSup);
+    }
+    
+    // Lista de productos con precio entre ordendados por descripción con SQL nativo
+    @Override
+    @Transactional(readOnly=true)    
+    public List<Producto> metodoNativo(double precioInf, double precioSup) {
+        return productoDao.metodoNativo(precioInf, precioSup);
+    }
 }

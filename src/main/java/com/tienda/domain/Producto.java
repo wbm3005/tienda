@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data // generar por debajo los getter y setter
 @Entity
-@Table(name="categoria")
+@Table(name="producto")
 public class Producto implements Serializable{
     private static final long serialVersionUID = 1L;
 
@@ -16,7 +16,6 @@ public class Producto implements Serializable{
     @Column(name = "id_producto")
     private Long idProducto;
     
-    //private Long idCategoria;
     private String descripcion;
     private String detalle;
     private double precio;
