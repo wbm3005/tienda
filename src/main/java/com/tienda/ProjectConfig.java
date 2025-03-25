@@ -1,5 +1,8 @@
 package com.tienda;
 
+import com.tienda.domain.RequestMatcher;
+import com.tienda.service.RequestMatcherService;
+import java.util.List;
 import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -104,6 +107,8 @@ public class ProjectConfig implements WebMvcConfigurer {
         build.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
     
+    
+    /*
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -133,5 +138,35 @@ public class ProjectConfig implements WebMvcConfigurer {
                 .loginPage("/login").permitAll())
                 .logout((logout) -> logout.permitAll());
         return http.build();
+    }*/
+    
+    @Autowired
+    RequestMatcherService requestMatcherService;
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        // Traer de BD los registros
+        List<RequestMatcher> requestMatchers = requestMatcherService.getAllRequestMatchers();
+
+        http
+                .authorizeHttpRequests((request) -> {
+                    request
+                            .requestMatchers("/", "/index", "/errores/**", "/error", "/error/**",
+                                    "/carrito/**", "/pruebas/**", "/reportes/**",
+                                    "/registro/**", "/js/**", "/css/**", "/webjars/**")
+                            .permitAll();
+
+                    for (RequestMatcher matcher : requestMatchers) {
+                        request
+                                .requestMatchers(matcher.getPattern())
+                                .hasRole(matcher.getRoleName());
+                    }
+                })
+                .formLogin((form) -> form
+                .loginPage("/login").permitAll())
+                .logout((logout) -> logout.permitAll());
+
+        return http.build();
     }
+
 }
